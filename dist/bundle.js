@@ -60,8 +60,10 @@
             window[callBackName] = callback;
         }
         var combinationString = combination.filter(function (item) { return !!item; }).map(function (item) { return addPrefix(item); }).join(_splitTag);
+        alert(123);
         if (!window.AevApi)
             throw new AevWebViewError("当前不在aevwebview环境，请检查你的环境");
+        alert(456);
         window.AevApi.postMessage(combinationString);
     }
 

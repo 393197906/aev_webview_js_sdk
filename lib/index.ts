@@ -29,7 +29,9 @@ export function call<P = any>(methodName: string, params: P, callback: Function)
         window[callBackName] = callback
     }
     const combinationString = combination.filter(item => !!item).map(item => addPrefix(item)).join(_splitTag);
+    alert(123);
     if (!window.AevApi) throw new AevWebViewError("当前不在aevwebview环境，请检查你的环境");
+    alert(456)
     window.AevApi.postMessage(combinationString)
 }
 
