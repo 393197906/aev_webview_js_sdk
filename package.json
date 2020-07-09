@@ -6,7 +6,7 @@
   "typings": "types/index.d.ts",
   "scripts": {
     "deveplement": "rollup -w -c",
-    "build": "rollup --config",
+    "build": "cross-env NODE_ENV=production  rollup --config",
     "server": "serve -l 1234 .",
     "test": "jest"
   },
@@ -26,8 +26,7 @@
     "rollup-plugin-json": "^4.0.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.4",
-    "lodash": "^4.17.19",
-    "@types/lodash": "^4.14.157"
+    "cross-env": "^7.0.2"
   },
   "dependencies": {
     "assert": "^2.0.0"

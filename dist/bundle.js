@@ -70,11 +70,20 @@
             throw new AevWebViewError("当前不在aevwebview环境，请检查你的环境");
         window.AevApi.postMessage(combinationString);
     }
+    // callWithPromise
+    function callWithPromise(methodName, params) {
+        return new Promise((function (resolve, reject) {
+            return call(methodName, params, function (resultMap) {
+                resolve(resultMap);
+            });
+        }));
+    }
     function isPlainObject(value) {
         return Object.getPrototypeOf(value) === null || Object === value.constructor;
     }
 
     exports.call = call;
+    exports.callWithPromise = callWithPromise;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

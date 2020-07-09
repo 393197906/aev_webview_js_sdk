@@ -3,7 +3,6 @@ const _splitTag = "@@@"
 
 class AevWebViewError extends Error {
     message: string;
-
     constructor(message: string) {
         super(message);
         this.message = message;
@@ -35,6 +34,16 @@ export function call<P extends { [key: string]: any }>(methodName: string, param
     if (!window.AevApi) throw new AevWebViewError("当前不在aevwebview环境，请检查你的环境");
     window.AevApi.postMessage(combinationString)
 }
+
+// callWithPromise
+export function callWithPromise<P extends { [key: string]: any }>(methodName: string, params: P): PromiseLike<P> {
+    return new Promise(((resolve, reject) => {
+        return call(methodName, params, function (resultMap) {
+            resolve(resultMap)
+        })
+    }))
+}
+
 
 function isPlainObject(value: any): boolean {
     return Object.getPrototypeOf(value) === null || Object === value.constructor;
