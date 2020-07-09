@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-777
+<body style="background: green">
+hello world11
 <script type="text/javascript" src="../dist/bundle.js"></script>
 <script>
-    AevWebview.call("test", "parmas", function () {
-
+    AevWebview.call("test", {name: "123"}, (res) => {
+        console.log(res.name);
     })
-    console.log("eeeeeeeeeeeeeeee");
 </script>
 </body>
 </html>

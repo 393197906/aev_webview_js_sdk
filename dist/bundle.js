@@ -33,7 +33,7 @@
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     }
 
-    var _prefix = "$a_";
+    var _prefix = "$aev_";
     var _splitTag = "@@@";
     var AevWebViewError = /** @class */ (function (_super) {
         __extends(AevWebViewError, _super);
@@ -53,18 +53,25 @@
     }
     // 调用flutter
     function call(methodName, params, callback) {
+        if (!arguments.length)
+            throw new AevWebViewError("call\u65B9\u6CD5\u81F3\u5C11\u9700\u8981\u4E00\u4E2A\u53C2\u6570");
+        if (typeof methodName !== "string")
+            throw new AevWebViewError("methodName\u5FC5\u987B\u662F\u4E00\u4E2A\u5B57\u7B26\u4E32");
+        if (!isPlainObject(params))
+            throw new AevWebViewError(methodName + "\u65B9\u6CD5\u7684params\u53C2\u6570\u4E0D\u662F\u4E00\u4E2A\u6709\u6548\u7684\u5B57\u9762\u91CF\u5BF9\u8C61");
         var combination = [methodName, JSON.stringify(params)];
+        var combinationString = combination.filter(function (item) { return !!item; }).map(function (item) { return addPrefix(item); }).join(_splitTag);
         if (callback) {
-            var callBackName = generateCallBackName(methodName);
-            combination.push(callBackName);
+            var callBackName = generateCallBackName(addPrefix(methodName));
+            combinationString = combinationString + _splitTag + callBackName;
             window[callBackName] = callback;
         }
-        var combinationString = combination.filter(function (item) { return !!item; }).map(function (item) { return addPrefix(item); }).join(_splitTag);
-        alert(123);
         if (!window.AevApi)
             throw new AevWebViewError("当前不在aevwebview环境，请检查你的环境");
-        alert(456);
         window.AevApi.postMessage(combinationString);
+    }
+    function isPlainObject(value) {
+        return Object.getPrototypeOf(value) === null || Object === value.constructor;
     }
 
     exports.call = call;

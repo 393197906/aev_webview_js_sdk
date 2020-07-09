@@ -1,1 +1,3 @@
-export declare function call<P = any>(methodName: string, params: P, callback: Function): void;
+export declare function call<P extends {
+    [key: string]: any;
+}>(methodName: string, params: P, callback?: (resultMap: P) => void): void;

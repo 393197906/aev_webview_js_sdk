@@ -7,6 +7,7 @@
   "scripts": {
     "deveplement": "rollup -w -c",
     "build": "rollup --config",
+    "server": "serve -l 1234 .",
     "test": "jest"
   },
   "author": "",
@@ -24,7 +25,9 @@
     "rollup-plugin-uglify": "^6.0.3",
     "rollup-plugin-json": "^4.0.0",
     "ts-jest": "^24.1.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "lodash": "^4.17.19",
+    "@types/lodash": "^4.14.157"
   },
   "dependencies": {
     "assert": "^2.0.0"
