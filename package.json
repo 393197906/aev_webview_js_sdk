@@ -1,6 +1,6 @@
 {
   "name": "aev_webview_js_sdk",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "",
   "main": "dist/bundle.js",
   "typings": "types/index.d.ts",
