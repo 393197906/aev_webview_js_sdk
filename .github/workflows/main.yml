@@ -7,7 +7,7 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
 
 
 jobs:
@@ -15,24 +15,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+      - uses: actions/checkout@master
 
-    - name: setnode
-      uses: actions/setup-node@v1
-      with:
-       node-version: '12'
-
-    - name: run
-      run: |
-           npm install
-           npm run build
-
-    - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
+      - name: setnode
+        uses: actions/setup-node@v1
         with:
-          args: dist/release.js application/octet-stream
+          node-version: '12'
+
+      - name: run
+        run: |
+          npm install
+          npm run build
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: test
+          release_name: Release test
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: ./dist/release.js
+            asset_name: ./dist/release.js
+            asset_content_type: application/javascript
 
 
 
