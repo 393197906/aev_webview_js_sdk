@@ -6,8 +6,8 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches:
-      - master
+#    branches:
+#      - master
     tags:
       - 'v*'
 jobs:
@@ -37,8 +37,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
-            - First Change
-            - Second Change
           draft: false
           prerelease: false
 
