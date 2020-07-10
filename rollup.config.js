@@ -10,7 +10,8 @@ const isProd = process.env.NODE_ENV === "production";
 export default {
     input: "lib/index.ts",
     output: {
-        file: isProd ? `dist/${pck.name}${pck.version}.js` : 'dist/bundle.js',
+        sourcemap: true,
+        file: isProd ? `dist/release.js` : 'dist/bundle.js',
         format: "umd",
         name: "AevWebview"
     },
